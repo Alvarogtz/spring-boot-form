@@ -1,25 +1,32 @@
 package com.bolsadeideas.springboot.form.app.models.domain;
 
+import com.bolsadeideas.springboot.form.app.validators.IdentificadorRegex;
+
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 public class Usuario {
 
-	private int id;
-	@NotEmpty
+	//@Pattern(regexp = "[0-9]{2}[.][0-9]{3}[.][0-9]{3}[-][A-Z]{1}")
+	@IdentificadorRegex
+	private String id;
+	@NotBlank
 	@Size(min = 3, max = 6)
 	private String username;
 	@NotEmpty
 	private String password;
 	@NotEmpty
+	@Email
 	private String email;
-	@NotEmpty
+	//@NotEmpty
 	private String nombre;
-	@NotEmpty
+	@NotBlank
 	private String apellido;
 
-	public Usuario(@NotEmpty String nombre, @NotEmpty String apellido, int id) {
+	public Usuario(@NotEmpty String nombre, @NotEmpty String apellido, String id) {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.id = id;
@@ -65,11 +72,11 @@ public class Usuario {
 		this.apellido = apellido;
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
