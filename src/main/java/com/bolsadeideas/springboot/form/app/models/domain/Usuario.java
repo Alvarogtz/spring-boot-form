@@ -1,17 +1,26 @@
 package com.bolsadeideas.springboot.form.app.models.domain;
 
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.bolsadeideas.springboot.form.app.validators.IdentificadorRegex;
 
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 public class Usuario {
 
 	//@Pattern(regexp = "[0-9]{2}[.][0-9]{3}[.][0-9]{3}[-][A-Z]{1}")
-	@IdentificadorRegex
+	//@IdentificadorRegex
 	private String id;
 	@NotBlank
 	@Size(min = 3, max = 6)
@@ -25,6 +34,20 @@ public class Usuario {
 	private String nombre;
 	@NotBlank
 	private String apellido;
+	
+	@NotNull
+	@Min(5)
+	@Max(5000)
+	private Integer cuenta;
+	
+	@NotNull
+	//@DateTimeFormat(pattern = "yyyy/MM/dd")
+	@Past
+	//@Future
+	private Date fechaNacimiento;
+	
+	@NotEmpty
+	private String pais;
 
 	public Usuario(@NotEmpty String nombre, @NotEmpty String apellido, String id) {
 		this.nombre = nombre;
@@ -79,5 +102,33 @@ public class Usuario {
 	public void setId(String id) {
 		this.id = id;
 	}
+
+	public Integer getCuenta() {
+		return cuenta;
+	}
+
+	public void setCuenta(Integer cuenta) {
+		this.cuenta = cuenta;
+	}
+
+	public Date getFechaNacimiento() {
+		return fechaNacimiento;
+	}
+
+	public void setFechaNacimiento(Date fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
+	}
+
+	public String getPais() {
+		return pais;
+	}
+
+	public void setPais(String pais) {
+		this.pais = pais;
+	}
+	
+	
+	
+	
 
 }
